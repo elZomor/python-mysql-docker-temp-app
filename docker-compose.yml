@@ -3,6 +3,7 @@ version: "3.9"
 services:
   db:
     container_name: database
+    command: --init-file /data/application/init.sql
     image: mysql
     restart: always
     env_file:
@@ -11,6 +12,7 @@ services:
       - '3308:3306'
     volumes:
       - db:/var/lib/mysql
+      - ./database_config/init.sql:/data/application/init.sql
   web:
     container_name: server
     build: .
